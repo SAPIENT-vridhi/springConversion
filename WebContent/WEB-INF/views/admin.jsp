@@ -3,7 +3,7 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -78,7 +78,9 @@
 		<tr height="700px" width="1500px">
 			<td height="700px" width="300px"
 				style="background-color: orange; color: black; font-size: 30px;">
-				<form action="AdminEntry" style="text-align: center;">
+				
+				
+				<form:form action="./AdminEntry" style="text-align: center;">
 					<input type="button" name="button" id="vc" value="  View Category "><br>
 					<br> <input type="button" name="button" id="ap"
 						value="  Add  Product   "><br>
@@ -96,7 +98,7 @@
 					<br>
 
 
-				</form>
+				</form:form>
 
 			</td>
 			<td height="700px" width="1500px"

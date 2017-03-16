@@ -4,18 +4,22 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.project.bean.Product"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="com.project.bean.CartDetails"%>
 <%@page import="com.project.bean.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML>
 <html>
 <head>
 <title>Gretong a Ecommerce Category Flat Bootstarp Responsive
 	Website Template | Home :: w3layouts</title>
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-<!-- jQuery (necessary JavaScripts plugins) -->
+<!-- jQuery (necessary JavaScript plugins) -->
 <script type='text/javascript' src="js/jquery-1.11.1.min.js"></script>
 <!-- Custom Theme files -->
 <link href="css/style.css" rel='stylesheet' type='text/css' />
@@ -27,7 +31,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	content="Gretong Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript">
+	
+	
+	
+	
+	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
+
+
+
+
 </script>
 <link
 	href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'
@@ -39,6 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/megamenu.css" rel="stylesheet" type="text/css"
 	media="all" />
 <script type="text/javascript" src="js/megamenu.js"></script>
+<c:if test="${empty sessionScope.email}"></<c:redirect url="/index.jsp"></c:redirect></c:if>
 <script>
 	$(document).ready(function() {
 		$(".megamenu").megamenu();
@@ -48,16 +67,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/simpleCart.min.js">
 	
 </script>
-<script>
-		var audio = new Audio('The Trip Song with Lyrics.mp3');
-		audio.play();
-		</script> 
 </head>
 <body>
-
-	<!-- Load category list from database -->
-<!--<jsp:include page="/AvailableCategory" />-->
-
 	<!-- header_top -->
 	<div class="top_bg">
 		<div class="container">
@@ -66,7 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul>
 						<li><a href="#">help</a></li>|
 						<li><a href="#">Contact</a></li>|
-						<li><a href="#">Delivery information</a></li>
+						<li><a href="CallErrorPageServlet">Delivery information</a></li>
 					</ul>
 				</div>
 				<div class="top_left">
@@ -84,45 +95,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="header">
 				<div class="head-t">
 					<div class="logo">
-						<a href="index.jsp"><span id="logo" style="color:navy; font-size: large;   ">Amazon Online Store</span> </a>
+						<a href="index.jsp"><span id="logo">Amazon Online Store</span>
+						</a>
 					</div>
 					<!-- start header_right -->
 					<div class="header_right">
 						<div class="rgt-bottom">
 							<!-- Session check -->
 							<!-- Providing login and register option  only if user variable is exit in session scope -->
-							<c:if test="${sessionScope.email == null}">
 
-								<div class="log">
-									<div class="login">
-										<div id="loginContainer">
-											<a href="#" id="loginButton"><span>Login</span></a>
-											<div id="loginBox">
-												<!-- Insert target jsp page -->
-												<form id="loginForm" action=".\LoginServlet" method="post">
-													<fieldset id="body">
-														<fieldset>
-															<label for="email">Email Address</label> <input
-																type="text" name="email" id="email">
-														</fieldset>
-														<fieldset>
-															<label for="password">Password</label> <input
-																type="password" name="password" id="password">
-														</fieldset>
-														<input type="submit" id="login" value="Sign in"> <label
-															for="checkbox"><input type="checkbox"
-															id="checkbox"> <i>Remember me</i></label>
-													</fieldset>
-													<!-- <span><a href="#">Forgot your password?</a></span>-->
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="reg">
-									<a href="register.jsp">REGISTER</a>
-								</div>
-							</c:if>
 							<!--  Link for signout  only if user variable is not exit in session scope -->
 							<c:if test="${sessionScope.email != null}">
 								<div class="log">
@@ -131,7 +112,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="log">
 									<a href="./CustomerAllBill">BILL DETAILS</a>
 								</div>
-								
+
 								<!--  Link for profile information updation  -->
 								<div class="log" style="margin-left: 0px;">
 									<a href="UpdateCustomerProfile.jsp">UPDATE PROFILE</a>
@@ -158,144 +139,171 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 						<div class="search">
-							<form action="SearchProductServlet">
+							<form:form action="./SearchProductServlet">
 								<input type="text" value="" placeholder="search by product name"
-									name="searchProduct"> <input type="submit" value="">
-							</form>
+									name="searchProduct"> 
+									<input type="submit" value="">
+							</form:form>
 						</div>
 						<div class="clearfix"></div>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 
-
 				<!-- start header menu -->
-				<!-- Category bar -->
+
+
+				<!-- header -->
 				<ul class="megamenu skyblue">
 					<li class="active grid"><a class="color1" href="index.jsp">Home</a></li>
-					<li class="grid"><a class="color1"  href="GetProducts">ALL</a></li>
-				<c:forEach items="${applicationScope['categoryList']}"
+					<li class="grid"><a class="color1" href="GetProducts">ALL</a></li>
+					<c:forEach items="${applicationScope['categoryList']}"
 						var="category">
-						<li class="grid"><a class="color6"  href="GetProducts?selectedCategory=${category.categoryName}">${category.categoryName}</a></li>
-						</c:forEach>
+						<li class="grid"><a class="color6"
+							href="GetProducts?selectedCategory=${category.categoryName}">${category.categoryName}</a></li>
+					</c:forEach>
 
 
 				</ul>
-				<!-- End of Header Menu -->
-				
-				</div>
-		</div>
-	</div>
-	<div class="arriv">
-		<div class="container">
-			<div class="arriv-top">
-				<div class="col-md-6 arriv-left">
-					<img style="width: 500px;height: 500px;" src="images/CLOTHING.jpg" class="img-responsive" alt="">
-					<div class="arriv-info">
-		
-						
-						<div class="crt-btn">
-							<a href="GetProducts?selectedCategory=CLOTHING">CLOTHING</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 arriv-right">
-					<a href="GetProducts?selectedCategory=BAGS"><img  style="width: 500px;height: 500px;" src="16" class="img-responsive" alt=""></a>
-					<div class="arriv-info">
-						
-						
-						<div class="crt-btn">
-									<a href="GetProducts?selectedCategory=BAGS">BAGS</a>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-			<div class="arriv-bottm">
-				<div class="col-md-8 arriv-left1">
-						<a href="GetProducts?selectedCategory=BOOKS"><img  style="width: 500px;height: 500px;" src="10" class="img-responsive" alt=""></a>	
-				<center>	<div class="arriv-info1">
-					<div class="crt-btn">
-					<a href="GetProducts?selectedCategory=BOOKS">BOOKS</a>
-							</div>
-						
-				
-					
-					</div></center>
-				</div>
-				
-				<div class="col-md-4 arriv-right1">
-				<a href="GetProducts?selectedCategory=SPORTS">	<img  style="width: 500px;height: 500px;" src="images/SPORT1.jpg" class="img-responsive" alt=""></a>
-				<center>	<div class="arriv-info2">
-						<div class="crt-btn">
-						<a href="GetProducts?selectedCategory=SPORTS">SPORTS</a>
-							</a>
-							</div>
-					</div></center>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-			<div class="arriv-las">
-				
-			
-			
-				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
-	<div class="special">
-		<div class="container">
-			<h3>Special Offers</h3>
-			<div class="specia-top">
-				<ul class="grid_2">
-					<li><img src="images/8.jpg"
-							class="img-responsive" alt=""></a>
-						<div class="special-info grid_1 simpleCart_shelfItem">
-							<h5>Lorem ipsum dolor</h5>
-							<div class="item_add">
-								<span class="item_price"><h6>ONLY $40.00</h6></span>
-							</div>
-							<div class="item_add">
-								<span class="item_price">COMMING SOON</span>
-							</div>
-						</div></li>
-					<li><img src="images/9.jpg"
-							class="img-responsive" alt=""></a>
-						<div class="special-info grid_1 simpleCart_shelfItem">
-							<h5>Consectetur adipis</h5>
-							<div class="item_add">
-								<span class="item_price"><h6>ONLY $60.00</h6></span>
-							</div>
-							<div class="item_add">
-								<span class="item_price">COMMING SOON</span>
-							</div>
-						</div></li>
-					<li><img src="images/10.jpg"
-							class="img-responsive" alt=""></a>
-						<div class="special-info grid_1 simpleCart_shelfItem">
-							<h5>Commodo consequat</h5>
-							<div class="item_add">
-								<span class="item_price"><h6>ONLY $14.00</h6></span>
-							</div>
-							<div class="item_add">
-								<span class="item_price">COMMING SOON</span>
-							</div>
-						</div></li>
-					<li><img src="images/11.jpg"
-							class="img-responsive" alt=""></a>
-						<div class="special-info grid_1 simpleCart_shelfItem">
-							<h5>Voluptate velit</h5>
-							<div class="item_add">
-								<span class="item_price"><h6>ONLY $37.00</h6></span>
-							</div>
-							<div class="item_add">
-								<span class="item_price">COMMING SOON</span>
-							</div>
-						</div></li>
+
+	<%
+		LinkedList<CartDetails> cartDetails = (LinkedList<CartDetails>) session.getAttribute("cartList");
+
+		double sum = 0;
+		for (CartDetails cart : cartDetails) {
+
+			sum = sum + cart.getTotalPrice();
+		}
+	%>
+
+
+
+	<div class="container">
+		<div class="check">
+			<div class="col-md-3 cart-total">
+				<a class="continue" href="index.jsp">Continue shopping</a>
+
+
+				<div class="price-details">
+					<h3>Price Details</h3>
+					<span>Total</span> <span class="total1" style="color: black;"><%=sum%></span>
+					<!-- 	<span>Discount</span> -->
+					<!--  <span class="total1">---</span> <span>Delivery Charges</span> <span
+						class="total1">150.00</span>-->
+					<div class="clearfix"></div>
+				</div>
+				<ul class="total_price">
+					<li class="last_price">
+						<h4>TOTAL</h4>
+					</li>
+					<li class="last_price"><span><%=sum%></span></li>
 					<div class="clearfix"></div>
 				</ul>
+
+
+				<div class="clearfix"></div>
+				<a class="order" href="Placeorder">Place Order</a>
+				<div class="total-item"></div>
+			</div>
+			<div class="col-md-9 cart-items">
+				<h1>My Shopping Bag</h1>
+
+				<script>
+					$(document).ready(function(c) {
+						$('.close1').on('click', function(c) {
+							$('.cart-header').fadeOut('slow', function(c) {
+								//$('.cart-header').remove();
+							});
+						});
+					});
+				<%--<% ArrayList<CartDetails> listOfItem=(ArrayList<CartDetails>)session.getAttribute("listOfItem"); %>--%>
+					
+				</script>
+				<%
+					LinkedList<CartDetails> cartDetails2 = (LinkedList<CartDetails>) session.getAttribute("cartList");
+
+					for (CartDetails cart : cartDetails2) {
+				%>
+
+				<div class="cart-header">
+					<div class="close1">
+						<form:form action="./RemoveFromCart2">
+							<input class="item_add" type="hidden"
+								value="<%=cart.getProductId()%>" name="pId"> <input
+								type="submit" class="item_price" value="Remove From Cart">
+						</form:form>
+					</div>
+					<div class="cart-sec simpleCart_shelfItem">
+						<div class="cart-item cyc">
+							<img src="<%=cart.getProductId()%>" class="img-responsive" alt="" />
+						</div>
+						<div class="cart-item-info">
+							<h3>
+								<a href=" "><%=cart.getProductName()%></a>
+							</h3>
+							Quantity:
+							<ul class="qty">
+								<li><p><%=cart.getQuantity()%></p></li>
+							</ul>
+
+							<div class="delivery">
+
+								<span>Delivered in 2-3 bussiness days</span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+
+						<div class="clearfix"></div>
+
+					</div>
+				</div>
+				<%
+					}
+				%>
+				<!-- 		<script>
+					$(document).ready(function(c) {
+						$('.close2').on('click', function(c) {
+							$('.cart-header2').fadeOut('slow', function(c) {
+								$('.cart-header2').remove();
+							});
+						});
+					});
+				</script>
+				<div class="cart-header2">
+					<div class="close2"></div>
+					<div class="cart-sec simpleCart_shelfItem">
+						<div class="cart-item cyc">
+							<img src="images/11.jpg" class="img-responsive" alt="" />
+						</div>
+						<div class="cart-item-info">
+							
+							<h3>
+								<a href="#">Mountain Hopper(XS R034)</a><span>Model No:
+									3578</span>
+							</h3>
+							<ul class="qty">
+								<li><p>Size : 5</p></li>
+								<li><p>Qty : 1</p></li>
+							</ul>
+							<div class="delivery">
+								<p>Service Charges : Rs.100.00</p>
+								<span>Delivered in 2-3 bussiness days</span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+ -->
+				<div class="clearfix"></div>
+
 			</div>
 		</div>
+	</div>
+
+
+	<div class="clearfix"></div>
+	</div>
 	</div>
 	<!-- Foot top section (Follow us on) -->
 	<div class="foot-top">
@@ -309,9 +317,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li>
 					<div class="social-ic">
 						<ul>
-							<li><a href="CallErrorPageServlet"><i class="facebok"> </i></a></li>
-							<li><a href="CallErrorPageServlet"><i class="twiter"> </i></a></li>
-							<li><a href="CallErrorPageServlet"><i class="goog"> </i></a></li>
+							<li><a href="CallErrorPageServlet"><i class="facebok">
+								</i></a></li>
+							<li><a href="CallErrorPageServlet"><i class="twiter">
+								</i></a></li>
+							<li><a href="CallErrorPageServlet"><i class="goog">
+								</i></a></li>
 							<li><a href="CallErrorPageServlet"><i class="be"> </i></a></li>
 							<li><a href="CallErrorPageServlet"><i class="pp"> </i></a></li>
 							<div class="clearfix"></div>
@@ -341,6 +352,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 	<!-- End of Foot top section (Follow us on) -->
+
 	<!-- Footer Section -->
 	<div class="footer">
 		<div class="container">
@@ -372,7 +384,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="clearfix"></div>
 				<li><i class="add"> </i>Jl. Haji Muhidin, Blok G no.69</li>
 				<li><i class="phone"> </i>025-2839341</li>
-				
+
 			</div>
 			<div class="clearfix"></div>
 			<p>

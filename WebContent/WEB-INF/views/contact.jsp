@@ -6,6 +6,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML>
 
 <html>
@@ -87,22 +88,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<a href="#" id="loginButton"><span>Login</span></a>
 											<div id="loginBox">
 												<!-- Insert target jsp page -->
-												<form id="loginForm" action=".\login">
+												<form:form id="loginForm" action="./login">
 													<fieldset id="body">
 														<fieldset>
-															<label for="email">Email Address</label> <input
-																type="text" name="email" id="email">
+															<form:label path="email">Email Address</form:label> 
+															<form:input path="email"/><br><br>
+															<input type="text" name="email" id="email">
 														</fieldset>
 														<fieldset>
-															<label for="password">Password</label> <input
-																type="password" name="password" id="password">
+															<form:label path="password">Password</form:label> 
+															<form:input path="password"/><br><br>
+															<input type="password" name="password" id="password">
 														</fieldset>
-														<input type="submit" id="login" value="Sign in"> <label
-															for="checkbox"><input type="checkbox"
-															id="checkbox"> <i>Remember me</i></label>
+														<input type="submit" id="login" value="Sign in"> 
+														<form:label path="checkbox"></form:label>
+														<form:input path="checkbox"/>
+														<input type="checkbox"	id="checkbox"> <i>Remember me</i></label>
 													</fieldset>
 													<!-- <span><a href="#">Forgot your password?</a></span>-->
-												</form>
+												</form:form>
 											</div>
 										</div>
 									</div>
@@ -138,10 +142,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 						<div class="search">
-							<form>
+							<form:form>
 								<input type="text" value="" placeholder="search..."> <input
 									type="submit" value="">
-							</form>
+							</form:form>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -159,22 +163,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<a href="#" id="loginButton"><span>Login</span></a>
 										<div id="loginBox">
 											<!-- Insert target jsp page -->
-											<form id="loginForm" action=".\login">
+											<form:form id="loginForm" action="./login">
 												<fieldset id="body">
 													<fieldset>
-														<label for="email">Email Address</label> <input
-															type="text" name="email" id="email">
+														<form:label path="email">Email Address</form:label>
+														<form:input path="email"/><br><br>
+														 <input	type="text" name="email" id="email">
 													</fieldset>
 													<fieldset>
-														<label for="password">Password</label> <input
-															type="password" name="password" id="password">
+														<form:label path="password">Password</form:label>
+														<form:input path="password"/><br><br> 
+														<input	type="password" name="password" id="password">
 													</fieldset>
-													<input type="submit" id="login" value="Sign in"> <label
-														for="checkbox"><input type="checkbox"
-														id="checkbox"> <i>Remember me</i></label>
+													<input type="submit" id="login" value="Sign in"> 
+													<form:label path="checkbox"></form:label>
+													<form:input path="checkbox"/><br><br>
+														<input type="checkbox" id="checkbox"> <i>Remember me</i></label>
 												</fieldset>
 												<!-- <span><a href="#">Forgot your password?</a></span>-->
-											</form>
+											</form:form>
 										</div>
 									</div>
 								</div>
@@ -210,10 +217,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 					<div class="search">
-						<form>
-							<input type="text" value="" placeholder="search..."> <input
-								type="submit" value="">
-						</form>
+						<form:form>
+							<input type="text" value="" placeholder="search..."> 
+							<input	type="submit" value="">
+						</form:form>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -231,22 +238,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<a href="#" id="loginButton"><span>Login</span></a>
 									<div id="loginBox">
 										<!-- Insert target jsp page -->
-										<form id="loginForm" action=".\login">
+										<form:form id="loginForm" action="./login">
 											<fieldset id="body">
 												<fieldset>
-													<label for="email">Email Address</label> <input type="text"
-														name="email" id="email">
+													<form:label path="email">Email Address</form:label>
+													<form:input path="email"/><br><br> 
+													<input type="text"	name="email" id="email">
 												</fieldset>
 												<fieldset>
-													<label for="password">Password</label> <input
-														type="password" name="password" id="password">
+													<form:label path="password">Password</form:label>
+													<form:input path="password"/><br><br> 
+													<input type="password" name="password" id="password">
 												</fieldset>
-												<input type="submit" id="login" value="Sign in"> <label
-													for="checkbox"><input type="checkbox" id="checkbox">
+												<input type="submit" id="login" value="Sign in"> 
+												<label ="checkbox"><input type="checkbox" id="checkbox">
 													<i>Remember me</i></label>
 											</fieldset>
 											<!-- <span><a href="#">Forgot your password?</a></span>-->
-										</form>
+										</form:form>
 									</div>
 								</div>
 							</div>

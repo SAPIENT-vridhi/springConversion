@@ -11,6 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -40,7 +41,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- start menu -->
 <link href="css/megamenu.css" rel="stylesheet" type="text/css"
 	media="all" />
-<link href="css/table.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="js/megamenu.js"></script>
 <script>
 	$(document).ready(function() {
@@ -53,8 +53,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 </head>
 <body>
-
 <c:if test="${empty sessionScope.email}"></<c:redirect url="/index.jsp"></c:redirect></c:if>
+
 	<!-- Load category list from database -->
 	<!-- header_top -->
 	<div class="top_bg">
@@ -98,22 +98,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<a href="#" id="loginButton"><span>Login</span></a>
 											<div id="loginBox">
 												<!-- Insert target jsp page -->
-												<form id="loginForm" action=".\LoginServlet">
+												<form:form id="loginForm" action=".\LoginServlet">
 													<fieldset id="body">
 														<fieldset>
-															<label for="email">Email Address</label> <input
-																type="text" name="email" id="email">
+															<form:label path="email">Email Address</form:label>
+															 <form:input path="email"/><br><br>
+															 <input	type="text" name="email" id="email">
 														</fieldset>
 														<fieldset>
-															<label for="password">Password</label> <input
-																type="password" name="password" id="password">
+															<form:label path="password">Password</form:label> 
+															<form:input path="password"/><br><br>
+															<input	type="password" name="password" id="password">
 														</fieldset>
-														<input type="submit" id="login" value="Sign in"> <label
-															for="checkbox"><input type="checkbox"
-															id="checkbox"> <i>Remember me</i></label>
+														<input type="submit" id="login" value="Sign in"> 
+														<label	path="checkbox">
+														<input type="checkbox" id="checkbox"> <i>Remember me</i></label>
 													</fieldset>
 													<!-- <span><a href="#">Forgot your password?</a></span>-->
-												</form>
+												</form:form>
 											</div>
 										</div>
 									</div>
@@ -127,10 +129,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="log">
 									<a href="./Logout">LOGOUT</a>
 								</div>
-								<div class="log">
-									<a href="./CustomerAllBill">BILL DETAILS</a>
-								</div>
-
 								<!--  Link for profile information updation  -->
 								<div class="log" style="margin-left: 0px;">
 									<a href="UpdateCustomerProfile.jsp">UPDATE PROFILE</a>
@@ -143,7 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 
 						<div class="cart box_1">
-							<a href="CheckoutServlet">
+							<a href="checkout.jsp">
 								<h3>
 									<span></span>
 								</h3>
@@ -157,7 +155,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 						<div class="search">
-							<form action="SearchProductServlet">
+							<form action="#">
 								<input type="text" value="" placeholder="search by product name"
 									name="searchProduct"> <input type="submit" value="">
 							</form>
@@ -166,6 +164,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<div class="clearfix"></div>
 				</div>
+
+
+				<!-- start header menu -->
 				<!-- Category bar -->
 				<ul class="megamenu skyblue">
 					<li class="active grid"><a class="color1" href="index.jsp">Home</a></li>
@@ -190,28 +191,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="container" style="margin-left: 130px;">
 		<div class="women_main" style="margin-left: 50px;">
 			<!-- *********************************************************************************************** -->
+			private int customerId; private int billId; private int productId;
+			private double price; private int discount; private int quantity;
+			private double totalPrice; private Date date;
+
+
 			<!-- start content -->
-		<script>
- 
-			function printDiv(divName) {
-			     var printContents = document.getElementById(divName).innerHTML;
-			     var originalContents = document.body.innerHTML;
 
-			     document.body.innerHTML = printContents;
-
-			     window.print();
-
-			     document.body.innerHTML = originalContents;
-			} 
-						
-
-		</script>
 			<div class="items">
-				<div style="width: 100%;" id="divName">
+				<div style="width: 100%;">
 					<!-- Run loop to display the products  -->
 					<!-- Used jstl tag for loop and printing the object values -->
 					<table>
-						<c:forEach items="${sessionScope.allBill}" var="bill">
+						<c:forEach items="${requestScope.currentBillList}" var="bill">
 							<tr>
 								<td><h4>DATE</h4></td>
 								<td><h4>
@@ -255,16 +247,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<c:out value="${bill.totalPrice}"></c:out>
 									</h4></td>
 							</tr>
-							<tr>
-								<td><h4><br></h4></td>
-								<td><h4>
-										<br> 	
-									</h4></td>
-							</tr>
 						</c:forEach>
 					</table>
 				</div>
-				<input type="button" onclick="printDiv('divName')" value="SAVE">
 			</div>
 		</div>
 
@@ -318,7 +303,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 	<!-- End of Foot top section (Follow us on) -->
-
 	<!-- Footer Section -->
 	<div class="footer">
 		<div class="container">
