@@ -33,7 +33,7 @@ public class LoginController {
 		try {
 			CustomerBl customerBL = new CustomerBl();
 	
-				//category=(ArrayList<Category>)customerBL.viewCategory();
+				category=(ArrayList<Category>)customerBL.viewCategory();
 		} catch (Exception e) {
 			System.out.println(">>>>>>>>>>>>>>>>"+e);
 		}
@@ -68,14 +68,16 @@ public class LoginController {
 	
 		else{
 			Customer customer1;
-			try{
+			try{ System.out.println("sasasas>>>>>>>>>>");
+				
 				customer1 = customerBL.signIn(email, password);
 				System.out.println(customer);
 			}
 			catch(ClassNotFoundException | SQLException e){
 				mv.addObject("message", "<a href=\"index.jsp\">Invalid User, please retry again</a>");
 				mv.setViewName("index");
-				System.out.println(e);
+				e.printStackTrace();
+				System.out.println(">>>>>>>>>>>>>"+e);
 				return mv;    
 			}
 		

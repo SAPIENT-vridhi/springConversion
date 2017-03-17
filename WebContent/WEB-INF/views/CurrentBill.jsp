@@ -102,13 +102,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													<fieldset id="body">
 														<fieldset>
 															<form:label path="email">Email Address</form:label>
-															 <form:input path="email"/><br><br>
-															 <input	type="text" name="email" id="email">
+															 <form:input path="email" type="text" name="email" id="email"/><br><br>
+															
 														</fieldset>
 														<fieldset>
 															<form:label path="password">Password</form:label> 
-															<form:input path="password"/><br><br>
-															<input	type="password" name="password" id="password">
+															<form:input path="password" type="password" name="password" id="password"/><br><br>
+															
 														</fieldset>
 														<input type="submit" id="login" value="Sign in"> 
 														<label	path="checkbox">
