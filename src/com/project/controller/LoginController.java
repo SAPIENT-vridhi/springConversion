@@ -27,23 +27,25 @@ public class LoginController {
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView myMain(){
+	public ModelAndView myMain() throws ClassNotFoundException, SQLException{
 		ModelAndView mv=new ModelAndView();
-		CustomerBl customerBL = new CustomerBl();
 		ArrayList<Category> category= null;
-		
-		try{
-			category=(ArrayList<Category>)customerBL.viewCategory();
+		try {
+			CustomerBl customerBL = new CustomerBl();
+	
+				//category=(ArrayList<Category>)customerBL.viewCategory();
+		} catch (Exception e) {
+			System.out.println(">>>>>>>>>>>>>>>>"+e);
 		}
-		catch(ClassNotFoundException|SQLException e){
-			System.out.println(e);
-		} 
+		
+		 
 		mv.addObject("categoryList", category);
-		mv.setViewName("index");
+		mv.setViewName("./index");
 		mv.addObject("customer", new Customer());
 		
 		return mv;
 	}
+	
 	
 	
 	

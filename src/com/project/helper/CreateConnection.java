@@ -54,7 +54,7 @@ public static Connection getCon() throws SQLException
 			//connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521", "system", "system");
 			
 			
-			connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521", "system", "sapient@123");
+			connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XE", "system", "sapient@123");
 		} catch (ClassNotFoundException | SQLException e) {
 			
 	// handling exception 

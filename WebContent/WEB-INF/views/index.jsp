@@ -134,7 +134,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 								<div class="reg">
-									<a href="register.jsp">REGISTER</a>
+									<a href="./register">REGISTER</a>
 								</div>
 							</c:if>
 							<!--  Link for signout  only if user variable is not exit in session scope -->

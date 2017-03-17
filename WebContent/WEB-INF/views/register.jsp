@@ -51,7 +51,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 	<!-- Load category list from database -->
-	<jsp:include page="/AvailableCategory" />
+<!-- <jsp:include page="/AvailableCategory" /> -->	
 
 	<!-- header_top -->
 	<div class="top_bg">
@@ -94,22 +94,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<a href="#" id="loginButton"><span>Login</span></a>
 											<div id="loginBox">
 												<!-- Insert target jsp page -->
-												<form id="loginForm" action=".\LoginServlet" method="post">
+												<form:form id="loginForm" action="./login" method="post" commandName="customer">
 													<fieldset id="body">
 														<fieldset>
-															<label for="email">Email Address</label> <input
-																type="text" name="email" id="email">
+															<form:label path="email">Email Address</form:label> 
+													<form:input path="email" type="text" name="email" id="email"/>
 														</fieldset>
 														<fieldset>
-															<label for="password">Password</label> <input
-																type="password" name="password" id="password">
+															<form:label path="password">Password</form:label> 
+															<form:input path="password" type="password" name="password" id="password"/>
 														</fieldset>
-														<input type="submit" id="login" value="Sign in"> <label
+														<form:input type="submit" id="login" value="Sign in"/> 
+														
+														
+														<label
 															for="checkbox"><input type="checkbox"
 															id="checkbox"> <i>Remember me</i></label>
 													</fieldset>
 													<!-- <span><a href="#">Forgot your password?</a></span>-->
-												</form>
+												</form:form>
 											</div>
 										</div>
 									</div>
@@ -235,47 +238,47 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</script>
 					<div class="registration_form">
 						<!-- Form -->
-						<form id="registration_form" action="Register" method="post">
+						<form:form id="registration_form" action="./register" method="post">
 							<div>
-								<label> <input placeholder="first name:" type="text"
+								<form:label> <form:input path="firstName" placeholder="first name:" type="text"
 									pattern=^[a-zA-Z]{1,20}$ tabindex="1" name="fname" required
-									autofocus>
-								</label>
+									autofocus/>
+								</form:label>
 							</div>
 							<div>
-								<label> <input placeholder="last name:" type="text"
+								<form:label> <form:input path="lastName" placeholder="last name:" type="text"
 									tabindex="2" pattern=^[a-zA-Z]{1,20}$ name="lname" required
-									autofocus>
-								</label>
+									autofocus/>
+								</form:label>
 							</div>
 							<div>
-								<label> <input placeholder="email address:" type="email"
-									name="email" tabindex="3" required>
-								</label>
+								<form:label> <form:input path="email" placeholder="email address:" type="email"
+									name="email" tabindex="3" required/>
+								</form:label>
 							</div>
 							<div>
-								<label> <input placeholder="number" type="tel"
-									name="phone" pattern=^[7-9][0-9]{9}$ tabindex="3" required>
-								</label>
+								<form:label> <form:input path="phoneNumber" placeholder="number" type="tel"
+									name="phone" pattern=^[7-9][0-9]{9}$ tabindex="3" required/>
+								</form:label>
 							</div>
 						
 							<div>
-								<label> <input placeholder="password" type="password"
+								<form:label> <form:input path="password" placeholder="password" type="password"
 									pattern=^[a-zA-Z][a-zA-Z0-9-_\.]{7,20}$ name="pwd" tabindex="4"
-									required>
-								</label>
+									required/>
+								</form:label>
 							</div>
 							<div>
-								<label> <input placeholder="retype password"
+								<form:label> <form:input path="password" placeholder="retype password"
 									type="password" pattern=^[a-zA-Z][a-zA-Z0-9-_\.]{7,20}$
-									name="rpwd" tabindex="4" required>
-								</label>
+									name="rpwd" tabindex="4" required/>
+								</form:label>
 							</div>
 							<div>
-								<input type="submit" value="create an account"
-									id="register-submit">
+								<form:input type="submit" value="create an account"
+									id="register-submit"/>
 							</div>
-						</form>
+						</form:form>
 						<!-- /Form -->
 					</div>
 				</div>
